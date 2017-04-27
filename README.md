@@ -1,6 +1,6 @@
 # npmdoc-calendar
 
-#### api documentation for  [calendar (v0.1.0)](https://github.com/ramalho/calendar.js#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-calendar.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-calendar) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-calendar.svg)](https://travis-ci.org/npmdoc/node-npmdoc-calendar)
+#### basic api documentation for  [calendar (v0.1.0)](https://github.com/ramalho/calendar.js#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-calendar.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-calendar) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-calendar.svg)](https://travis-ci.org/npmdoc/node-npmdoc-calendar)
 
 #### calendar generator
 
@@ -52,7 +52,8 @@
         "type": "git",
         "url": "git://github.com/ramalho/calendar.js.git"
     },
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "bin": {}
 }
 ```
 
