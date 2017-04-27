@@ -65,12 +65,6 @@
 
         <li>
 
-            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan"></span>calendar</span>
-
-        </li>
-
-        <li>
-
             <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">calendar.</span>Calendar.prototype</span>
 
         </li>
@@ -217,25 +211,6 @@
 
     </ol></li>
 
-    <li class="apidocModuleLi"><a href="#apidoc.module.calendar.calendar">module calendar.calendar</a><ol>
-
-        <li>
-
-            <a class="apidocElementLiA" href="#apidoc.element.calendar.calendar.Calendar">
-            function <span class="apidocSignatureSpan">calendar.calendar.</span>Calendar
-            <span class="apidocSignatureSpan">(firstWeekDay)</span>
-            </a>
-
-        </li>
-
-        <li>
-
-            <span class="apidocSignatureSpan">string <span class="apidocSignatureSpan">calendar.calendar.</span>version</span>
-
-        </li>
-
-    </ol></li>
-
 </ol></div>
 
 <div class="apidocSectionDiv">
@@ -255,8 +230,6 @@
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
-
-
 
 
 
@@ -325,7 +298,23 @@
     //properties
     this.firstWeekDay = firstWeekDay || 0; // 0 = Sunday
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+			// HANDLE: $(expr, $(...))
+			} else if ( !context || context.jquery ) {
+				return ( context || rootjQuery ).find( selector );
+
+			// HANDLE: $(expr, context)
+			// (which is just equivalent to: $(context).find(expr)
+			} else {
+				return this.<span class="apidocCodeKeywordSpan">constructor</span>( context ).find( selector );
+			}
+
+		// HANDLE: $(function)
+		// Shortcut for document ready
+		} else if ( jQuery.isFunction( selector ) ) {
+			return rootjQuery.ready( selector );
+		}
+...</pre></li>
     </ul>
 
 
@@ -360,21 +349,22 @@
     return weeks;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-    } while ((date.getMonth()&lt;=month) &amp;&amp; (date.getFullYear()===year));
-    return weeks;
-},
-monthDays : function monthDays(year, month) {
-    var getDayOrZero = function getDayOrZero(date) {
-        return date.getMonth() === month ? date.getDate() : 0;
-    };
-    return this.<span class="apidocCodeKeywordSpan">monthDates</span>(year, month, getDayOrZero);
-},
-monthText : function monthText(year, month) {
-    if (typeof year === "undefined") {
-        var now = new Date();
-        year = now.getFullYear();
-        month = now.getMonth();
-    };
+      var now = new Date();
+      year = now.getFullYear();
+      month = now.getMonth();
+  };
+  var getDayOrBlank = function getDayOrBlank(date) {
+      return date.getMonth() === month ? date.getDate().toString() : "&amp;nbsp;";
+  };
+  var weeks = cal.<span class="apidocCodeKeywordSpan">monthDates</span>(year, month, getDayOrBlank,
+      function (week) { return week.join("&lt;/td&gt;&lt;td&gt;") });
+  return '&lt;tr&gt;&lt;td&gt;'+weeks.join('&lt;/td&gt;&lt;/tr&gt;\n&lt;tr&gt;&lt;td&gt;&amp;#
+x27;)+'&lt;/td&gt;&lt;/tr&gt;';
+}
+
+var page = function page(req, res) {
+res.writeHead(200, {'Content-Type': 'text/html'});
+res.end('&lt;table style="text-align: center; border:2px solid #aaa;"&gt;'
 ...</pre></li>
     </ul>
 
@@ -435,7 +425,22 @@ month.
         function (week) { return week.join(" ") });
     return weeks.join("\n");
 }</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var Calendar = require('../').Calendar
+  , cal = new Calendar()
+  , month = "";
+
+if (process.argv.length === 4) {
+    // Arguments are month and year, as in cal
+    // January is month 1 for the user, but 0 in JavaScript Date objects
+    month = cal.<span class="apidocCodeKeywordSpan">monthText</span>(parseInt(process.argv[3]),
+                          parseInt(process.argv[2])-1);
+} else {
+    month = cal.monthText();
+}
+
+console.log(month);
+...</pre></li>
     </ul>
 
 
@@ -472,29 +477,6 @@ do {
     weeks.push(weekFormatter ? weekFormatter(week) : week);
 ...</pre></li>
     </ul>
-
-
-</div>
-
-<div class="apidocSectionDiv">
-<h1><a href="#apidoc.module.calendar.calendar" id="apidoc.module.calendar.calendar">module calendar.calendar</a></h1>
-
-
-    <h2>
-        <a href="#apidoc.element.calendar.calendar.Calendar" id="apidoc.element.calendar.calendar.Calendar">
-        function <span class="apidocSignatureSpan">calendar.calendar.</span>Calendar
-        <span class="apidocSignatureSpan">(firstWeekDay)</span>
-        </a>
-    </h2>
-    <ul>
-    <li>description and source-code<pre class="apidocCodePre">function Calendar(firstWeekDay) {
-    //properties
-    this.firstWeekDay = firstWeekDay || 0; // 0 = Sunday
-}</pre></li>
-    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
-    </ul>
-
-
 
 
 </div>
